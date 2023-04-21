@@ -28,6 +28,9 @@ const Comments = db.define("comments", {
       key: "id",
     },
   },
+  status: {
+    type: DataTypes.ENUM("active", "deleted"),
+  },
 });
 
 module.exports = Comments;
