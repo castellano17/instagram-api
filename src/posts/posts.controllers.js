@@ -24,10 +24,11 @@ const createPost = async (postObj) => {
   return newPost;
 };
 
-const updatePost = async (postId, postObj) => {
+const updatePost = async (postId, userId, postObj) => {
   const selectedPost = Posts.findOne({
     where: {
       id: postId,
+      userId: userId,
     },
   });
   if (!selectedPost) return null;
@@ -35,10 +36,11 @@ const updatePost = async (postId, postObj) => {
   return updatedPost;
 };
 
-const deletePost = async (postId) => {
+const deletePost = async (postId, userId) => {
   const selectedPost = Posts.findOne({
     where: {
       id: postId,
+      userId: userId,
     },
   });
   if (!selectedPost) return null;
