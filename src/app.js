@@ -10,7 +10,7 @@ const db = require("./utils/database");
 const initModels = require("./models/initModels");
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 //? Validar la conexión
 
@@ -42,6 +42,7 @@ app.get("/", (req, res) => {
     message: "Server OK",
     myMessage: req.message,
     myPort: process.env.PORT,
+    queries: req.query,
   });
 });
 
