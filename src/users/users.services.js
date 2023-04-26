@@ -1,11 +1,29 @@
+const { host } = require("../../config");
 const userControllers = require("./users.controllers");
 //! const { findAllUsers, findUserById, createUser, updateUser } = require('./users.controllers')
 
 const getAllUsers = (req, res) => {
+  const offset = Number(req.query.offset) || 0;
+  const limit = Number(req.query.limit) || 10;
+
   userControllers
-    .findAllUsers()
+    .findAllUsers(limit, offset)
     .then((data) => {
-      res.status(200).json(data);
+      const nextPageUrl =
+        data.count - offset > limit
+          ? `${host}/api/v1/users?limit=${limit}&offset=${offset + limit}`
+          : null;
+      const prevPageUrl =
+        offset - limit >= 0
+          ? `${host}/api/v1/users?limit=${limit}&offset=${offset - limit}`
+          : null;
+
+      res.status(200).json({
+        count: data.count,
+        next: nextPageUrl,
+        prev: prevPageUrl,
+        results: data.rows,
+      });
     })
     .catch((err) => {
       res.status(400).json({ message: "Bad request", err });

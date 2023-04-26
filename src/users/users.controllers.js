@@ -1,31 +1,34 @@
-const Users = require('../models/users.models')
-const uuid = require('uuid')
-const { hashPassword } = require('../utils/crypto')
+const Users = require("../models/users.models");
+const uuid = require("uuid");
+const { hashPassword } = require("../utils/crypto");
 
-const findAllUsers = async () => {
-  const users = await Users.findAll()
-  return users
-}
+const findAllUsers = async (limit, offset) => {
+  const users = await Users.findAndCountAll({
+    limit: limit,
+    offset: offset,
+  });
+  return users;
+};
 
 const findUserById = async (id) => {
   const data = await Users.findOne({
-      where: {
-          id: id,
-      }
-  })
-  return data
-}
+    where: {
+      id: id,
+    },
+  });
+  return data;
+};
 
 const findUserByEmail = async (email) => {
   const data = await Users.findOne({
-      where: {
-          email : email
-      }
-  })
-  return data
-}
+    where: {
+      email: email,
+    },
+  });
+  return data;
+};
 
-const createUser = async(userObject) => {
+const createUser = async (userObject) => {
   const newUser = {
     id: uuid.v4(),
     firstName: userObject.firstName,
@@ -33,34 +36,33 @@ const createUser = async(userObject) => {
     email: userObject.email,
     password: hashPassword(userObject.password),
     birthday: userObject.birthday,
-    phone: userObject.phone
-  }
-  const data = await Users.create(newUser)
-  return data
-}
+    phone: userObject.phone,
+  };
+  const data = await Users.create(newUser);
+  return data;
+};
 
-const updateUser = async(id, userObj) => {
-
+const updateUser = async (id, userObj) => {
   const selectedUser = await Users.findOne({
-      where: {
-          id: id
-      }
-  })
-  
-  if(!selectedUser) return null
+    where: {
+      id: id,
+    },
+  });
 
-  const modifiedUser = await selectedUser.update(userObj)
-  return modifiedUser
-}
+  if (!selectedUser) return null;
 
-const deleteUser = async(id) => {
+  const modifiedUser = await selectedUser.update(userObj);
+  return modifiedUser;
+};
+
+const deleteUser = async (id) => {
   const user = await Users.destroy({
-      where: {
-          id: id
-      }
-  })
-  return user // 1 || 0
-}
+    where: {
+      id: id,
+    },
+  });
+  return user; // 1 || 0
+};
 
 module.exports = {
   findAllUsers,
@@ -68,5 +70,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  findUserByEmail
-}
+  findUserByEmail,
+};
