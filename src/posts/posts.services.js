@@ -41,7 +41,31 @@ const getPostById = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(400).json({ err });
+      res.status(400).json({ err: err.message });
+    });
+};
+
+const getPostsByUser = (req, res) => {
+  const userId = req.params.id;
+  postControllers
+    .findPostsByUserId(userId)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ err: err.message });
+    });
+};
+
+const getPostsByMyUser = (req, res) => {
+  const userId = req.user.id;
+  postControllers
+    .findPostsByUserId(userId)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ err: err.message });
     });
 };
 
@@ -96,6 +120,8 @@ const deletePost = (req, res) => {
 module.exports = {
   getAllPosts,
   getPostById,
+  getPostsByUser,
+  getPostsByMyUser,
   postNewPost,
   patchPost,
   deletePost,

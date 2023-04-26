@@ -23,4 +23,11 @@ router
     postServices.deletePost
   );
 
+router.get(
+  "/user/me",
+  passportJwt.authenticate("jwt", { session: false }),
+  postServices.getPostsByMyUser
+);
+router.get("/user/:id", postServices.getPostsByUser);
+
 module.exports = router;
