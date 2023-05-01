@@ -3,7 +3,7 @@ const uuid = require("uuid");
 const Comments = require("../models/comments.models");
 const Posts = require("../models/posts.models");
 const Users = require("../models/users.models");
-
+//
 const findAllCommentsByPostId = async (postId) => {
   const comments = await Comments.findAll({
     where: {
