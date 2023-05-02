@@ -12,6 +12,7 @@ const getAllCommentsByPost = (req, res) => {
     });
 };
 
+<<<<<<< HEAD
 const postComment = (req, res) => {
   const { content } = req.body;
   const postId = req.params.id;
@@ -29,4 +30,8 @@ const postComment = (req, res) => {
 module.exports = {
   getAllCommentsByPost,
   postComment,
+=======
+module.exports = {
+  getAllCommentsByPost,
+>>>>>>> 3b4ce9ca95333d2023ab61777a5fd6a05e17d03a
 };

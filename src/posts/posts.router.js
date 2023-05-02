@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const postServices = require("./posts.services");
 const passportJwt = require("../middlewares/passport.middleware");
+const commentsServices = require("../comments/comments.services");
 
 router
   .route("/")
@@ -29,5 +30,7 @@ router.get(
   postServices.getPostsByMyUser
 );
 router.get("/user/:id", postServices.getPostsByUser);
+
+router.route("/:id/comments").get(commentsServices.getAllCommentsByPost);
 
 module.exports = router;
