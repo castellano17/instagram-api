@@ -36,9 +36,8 @@ const initModels = () => {
   Posts.hasMany(Likes);
   Likes.belongsTo(Posts);
 
-  //* Users 1:M Follows
   Users.hasMany(Follows);
-
+  //* Users 1:M Follows
   Follows.belongsTo(Users, {
     foreignKey: "userId",
     as: "follower",
@@ -47,7 +46,7 @@ const initModels = () => {
   //* Users 1:M Follows
   Follows.belongsTo(Users, {
     foreignKey: "userId2",
-    as: "followed ",
+    as: "followed",
   });
 };
 
