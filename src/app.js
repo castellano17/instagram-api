@@ -61,6 +61,12 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1", followRouter);
 
+app.use("*", (req, res) => {
+  res.status(404).json({ message: "Not Found" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server started at port ${PORT}`);
 });
+
+module.exports = app;
