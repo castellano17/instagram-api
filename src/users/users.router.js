@@ -4,8 +4,7 @@ const router = require("express").Router();
 //! const router = express.Router()
 
 const userServices = require("./users.services");
-const budgetServices = require("../budget/budget.services");
-
+const followServices = require("../follows/follows.services");
 const JwtPassport = require("../middlewares/passport.middleware");
 
 // router.get('/users', userServices.getAllUsers)
@@ -31,14 +30,14 @@ router
   .delete(userServices.deleteUser);
 
 router
-  .route("/budget/total")
-  .get(
-    JwtPassport.authenticate("jwt", { session: false }),
-    budgetServices.getMyBudget
-  )
+  .route("/:id/follow")
   .post(
     JwtPassport.authenticate("jwt", { session: false }),
-    budgetServices.postNewBudget
+    followServices.postNewFollow
+  )
+  .delete(
+    JwtPassport.authenticate("jwt", { session: false }),
+    followServices.deleteFollow
   );
 
 module.exports = router;

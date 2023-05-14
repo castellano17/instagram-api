@@ -36,7 +36,16 @@ const Users = db.define("users", {
   country: {
     type: DataTypes.STRING,
   },
+  profyleImg: {
+    type: DataTypes.STRING,
+  },
   gender: {
+    type: DataTypes.STRING,
+  },
+  birthday: {
+    type: DataTypes.DATEONLY,
+  },
+  phone: {
     type: DataTypes.STRING,
   },
   role: {

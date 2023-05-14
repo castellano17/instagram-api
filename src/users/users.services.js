@@ -56,7 +56,7 @@ const postNewUser = (req, res) => {
       res.status(201).json(data);
     })
     .catch((err) => {
-      res.status(400).json({ message: "Bad request", error: err });
+      res.status(400).json({ message: "Bad request", err });
     });
 };
 
