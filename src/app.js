@@ -6,9 +6,7 @@ const swaggerUl = require("swagger-ui-express");
 
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
-const postRouter = require("./posts/posts.router");
-const followRouter = require("./follows/follows.router");
-const swaggerDoc = require("../swagger.json");
+//const swaggerDoc = require("../swagger.json");
 
 const upload = require("./middlewares/multer.middleware");
 const db = require("./utils/database");
@@ -56,11 +54,9 @@ app.post("/api/v1/add-file", upload.single("my-image"), (req, res) => {
   res.status(200).json({ message: req.file });
 });
 
-app.use("/swagger", swaggerUl.serve, swaggerUl.setup(swaggerDoc));
+//app.use("/swagger", swaggerUl.serve, swaggerUl.setup(swaggerDoc));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/posts", postRouter);
-app.use("/api/v1", followRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ message: "Not Found" });

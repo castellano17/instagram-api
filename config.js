@@ -13,7 +13,7 @@ const config = {
       dialect: "postgres",
       host: "localhost",
       port: 5432,
-      database: "instagram-db",
+      database: "gastos-control",
       username: "postgres",
       password: "root",
       //Extra configs
@@ -46,7 +46,7 @@ const config = {
       dialect: "postgres",
       host: "localhost",
       port: 5432,
-      database: "instagram-db",
+      database: "gastos-control",
       username: "postgres",
       password: "root",
       //Extra configs

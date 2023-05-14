@@ -1,9 +1,7 @@
 const Users = require("./users.models");
-const Posts = require("./posts.models");
-const Likes = require("./likes.models");
-const Follows = require("./follows.models");
-const Comments = require("./comments.models");
-const PostsMultimedia = require("./posts_multimedia.models");
+const Budget = require("./budget.models");
+const Expenses = require("./expenses.models");
+const Category = require("./category.models");
 
 const initModels = () => {
   //? hasOne // un usuario tiene un post (esos son ejemplos)
@@ -11,43 +9,22 @@ const initModels = () => {
   //? belongsTo // un usuario pertenece a una publicación
   //? belongsToMany // muchos usuarios pertenecen a muchas publicaciones
 
-  //* Users 1:M Post
+  //* Users 1:1 budget
 
-  Users.hasMany(Posts);
-  Posts.belongsTo(Users);
+  Users.hasMany(Budget);
+  Budget.belongsTo(Users);
 
-  //*  Posts 1:M Commenst
-  Posts.hasMany(Comments);
-  Comments.belongsTo(Posts);
+  //* gastos 1:M presupuesto
 
-  //* Users 1:M Commenst
-  Users.hasMany(Comments);
-  Comments.belongsTo(Users);
+  // cada presupuesto tiene muchos gastos
+  Budget.hasMany(Expenses);
+  // cada gasto pertenece a un presupuesto
+  Expenses.belongsTo(Budget);
 
-  //* Post 1:M PostsMultimedia
-  Posts.hasMany(PostsMultimedia);
-  PostsMultimedia.belongsTo(Posts);
+  //* gastos 1:M categorias
 
-  //*  Users 1:M Likes
-  Users.hasMany(Likes);
-  Likes.belongsTo(Users);
-
-  //* Posts 1:M Likes
-  Posts.hasMany(Likes);
-  Likes.belongsTo(Posts);
-
-  Users.hasMany(Follows);
-  //* Users 1:M Follows
-  Follows.belongsTo(Users, {
-    foreignKey: "userId",
-    as: "follower",
-  });
-
-  //* Users 1:M Follows
-  Follows.belongsTo(Users, {
-    foreignKey: "userId2",
-    as: "followed",
-  });
+  Expenses.hasMany(Category);
+  Category.belongsTo(Expenses);
 };
 
 module.exports = initModels;

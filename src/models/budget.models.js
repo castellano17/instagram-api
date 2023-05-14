@@ -1,16 +1,17 @@
-const db = require("../utils/database");
 const { DataTypes } = require("sequelize");
+const db = require("../utils/database");
 const Users = require("./users.models");
 
-const Posts = db.define("posts", {
+const Budget = db.define("budgets", {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
   },
-  content: {
-    type: DataTypes.TEXT,
+  total: {
+    type: DataTypes.DECIMAL,
     allowNull: false,
   },
+
   userId: {
     type: DataTypes.UUID,
     allowNull: false,
@@ -19,9 +20,6 @@ const Posts = db.define("posts", {
       key: "id",
     },
   },
-  status: {
-    type: DataTypes.ENUM("active", "deleted"),
-  },
 });
 
-module.exports = Posts;
+module.exports = Budget;
